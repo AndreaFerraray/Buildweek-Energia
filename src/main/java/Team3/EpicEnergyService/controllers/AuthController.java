@@ -2,7 +2,9 @@ package Team3.EpicEnergyService.controllers;
 
 import Team3.EpicEnergyService.entities.User;
 import Team3.EpicEnergyService.exceptions.BadRequestException;
-
+import Team3.EpicEnergyService.payloads.users.NewUserDTO;
+import Team3.EpicEnergyService.payloads.users.SeccessfullLoginDTO;
+import Team3.EpicEnergyService.payloads.users.UserLoginDTO;
 import Team3.EpicEnergyService.services.AuthService;
 import Team3.EpicEnergyService.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
