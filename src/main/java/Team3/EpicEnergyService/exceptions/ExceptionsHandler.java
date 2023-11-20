@@ -1,7 +1,7 @@
 package Team3.EpicEnergyService.exceptions;
 
 
-import andreademasi.payloads.users.ErrorsResponseWithListDTO;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
