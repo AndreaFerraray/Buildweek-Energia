@@ -18,6 +18,7 @@ public class Invoice {
     @Column
     private double sum;
     @Column
+    @Enumerated(EnumType.STRING)
     private InvoiceState invoiceState;
 
 }
