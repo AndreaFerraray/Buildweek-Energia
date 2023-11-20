@@ -1,5 +1,6 @@
 package Team3.EpicEnergyService.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,17 +18,17 @@ public class Client {
     @Table(name = "Client")
 
 
-    public class User {
+    public static class  client {
 
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         private Long id;
 
-        @Column(name = "VAT NUMBER",nullable = false)
+        @Column(name = "VAT NUMBER")
         private Long vatNumber ;
-        @Column(name = "email",nullable = false)
+        @Column(name = "email")
         private String email;
-        @Column(name = "insertion date",nullable = false)
+        @Column(name = "insertion date")
         private LocalDate insertionDate;
         @Column(name = "lastContractDate")
         private String lastContractDate;
@@ -57,6 +58,9 @@ public class Client {
 
         @Enumerated(EnumType.STRING)
         private BusinessName businessName;
+
+
+
 
     }
 }
