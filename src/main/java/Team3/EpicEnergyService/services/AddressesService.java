@@ -1,7 +1,7 @@
 package Team3.EpicEnergyService.services;
 
 import Team3.EpicEnergyService.entities.Address;
-import Team3.EpicEnergyService.entities.AddressesDTO;
+import Team3.EpicEnergyService.payloads.users.AddressesDTO;
 import Team3.EpicEnergyService.repositories.AddressesRepository;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
