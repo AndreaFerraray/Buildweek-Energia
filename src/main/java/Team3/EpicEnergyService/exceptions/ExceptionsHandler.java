@@ -2,6 +2,7 @@ package Team3.EpicEnergyService.exceptions;
 
 
 
+import Team3.EpicEnergyService.payloads.users.ErrorsResponseWithListDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -27,13 +28,13 @@ public class ExceptionsHandler {
     }
 
     @ExceptionHandler(UnauthorizedException.class)
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED) // 401
     public ErrorsPayload handleUnauthorized(UnauthorizedException ex) {
         return new ErrorsPayload(ex.getMessage(), new Date());
     }
 
     @ExceptionHandler(AccessDeniedException.class)
-    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ResponseStatus(HttpStatus.FORBIDDEN) // 403
     public ErrorsPayload handleAccessDenied(AccessDeniedException ex) {
         return new ErrorsPayload(ex.getMessage(), new Date());
     }

@@ -43,6 +43,8 @@ public class UserService {
         User newUser = new User();
         newUser.setUsername(userDTO.username());
         newUser.setRole(Role.USER);
+        newUser.setFirstName(userDTO.firstName());
+        newUser.setLastName(userDTO.lastName());
         newUser.setEmail(userDTO.email());
         newUser.setPassword(bcrypt.encode(userDTO.password()));
         return userRepo.save(newUser);
