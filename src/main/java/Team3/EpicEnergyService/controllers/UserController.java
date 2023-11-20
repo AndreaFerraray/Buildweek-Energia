@@ -6,6 +6,7 @@ import Team3.EpicEnergyService.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -23,17 +24,20 @@ public class UserController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
     Page<User> getAllUsers(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "2") int size) {
         return userService.getAllUsers(page, size);
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
     User findUserById(@PathVariable long id) {
         return userService.findUserById(id);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasAuthority('ADMIN')")
     void findUserByIdAndDelete(@PathVariable long id) {
         userService.findUserByIdAndDelete(id);
     }
