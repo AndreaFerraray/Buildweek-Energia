@@ -6,12 +6,16 @@ import Team3.EpicEnergyService.exceptions.BadRequestException;
 import Team3.EpicEnergyService.exceptions.NotFoundException;
 import Team3.EpicEnergyService.payloads.users.NewUserDTO;
 import Team3.EpicEnergyService.repositories.UserRepository;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
@@ -21,6 +25,9 @@ public class UserService {
     PasswordEncoder bcrypt;
     @Autowired
     private UserRepository userRepo;
+
+    @Autowired
+    private Cloudinary cloudinary;
 
 
     public User findUserById(long id) throws NotFoundException {
@@ -65,6 +72,13 @@ public class UserService {
     public User findByIdAndUpdateRole(long id) {
         User foundUser = this.findUserById(id);
         foundUser.setRole(Role.ADMIN);
+        return userRepo.save(foundUser);
+    }
+
+    public User uploadPicture(MultipartFile file, @PathVariable long id) throws IOException {
+        User foundUser = this.findUserById(id);
+        String cloudinaryURL = (String) cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
+        foundUser.setAvatar(cloudinaryURL);
         return userRepo.save(foundUser);
     }
 
