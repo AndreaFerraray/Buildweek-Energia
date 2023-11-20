@@ -14,7 +14,8 @@ public class Address {
     @Column(name = "id_address", nullable = false)
     private long id;
     private String street;
-    private String zipcode;
-    private int numberCivic;
+    private int zipcode;
+    private int civicNumber;
     private String city;
+    private String province;
 }
