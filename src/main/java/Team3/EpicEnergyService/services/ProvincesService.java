@@ -28,7 +28,7 @@ public class ProvincesService {
     }
 
     public void saveProvinceFromFile() {
-        File provinceFile = new File("/Users/Simo/Documents/Epicode/BackEnd/Buildweek-Energia/file/province-italiane.csv");
+        File provinceFile = new File("C:\\Users\\andre\\OneDrive\\Desktop\\General\\Epicode\\EPICODE-Backend\\Buildweek-Energia\\file\\province-italiane.csv");
         List<String[]> listaProvince = new ArrayList<>(this.readFile(provinceFile));
         listaProvince.forEach(elem -> {
             for (String e : elem) {
