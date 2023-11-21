@@ -27,7 +27,7 @@ public class CitiesService {
         }
     }
 
-    public void saveCityFromFile(/*AddressesDTO fromRequest*/) {
+    public void saveCityFromFile() {
         File comuniItalianiFile = new File("/Users/Simo/Documents/Epicode/BackEnd/Buildweek-Energia/file/comuni-italiani.csv");
         //File provinceFile = new File("/Users/Simo/Documents/Epicode/BackEnd/Buildweek-Energia/file/province-italiane.csv");
         List<String[]> listaComuni = new ArrayList<>(this.readFile(comuniItalianiFile));

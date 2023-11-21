@@ -16,5 +16,4 @@ public class Province {
     private String abbreviation;
     private String province;
     private String region;
-
 }
