@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "adresses")
 @Getter
@@ -18,4 +20,11 @@ public class Address {
     private int civicNumber;
     private String city;
     private String province;
+
+    @OneToOne(mappedBy = "sedeLegale")
+    private Client clientSede;
+
+    @OneToOne(mappedBy = "sedeOperativa")
+    private Client clientOperativo;
+
 }

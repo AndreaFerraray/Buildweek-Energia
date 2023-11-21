@@ -39,13 +39,13 @@ public class ClientService {
             throw new BadRequestException("L'email " + client.getEmail() + " è già utilizzata!");
         });
         clientRepo.findByEmailContatto(clientDTO.emailContatto()).ifPresent(client -> {
-            throw new BadRequestException("L'email " + client.getEmailContatto() + " è già utilizzata!");
+            throw new BadRequestException("L'email del contatto " + client.getEmailContatto() + " è già utilizzata!");
         });
         clientRepo.findByPartitaIva(clientDTO.partitaIva()).ifPresent(client -> {
-            throw new BadRequestException("L'email " + client.getPartitaIva() + " è già utilizzata!");
+            throw new BadRequestException("La partita iva " + client.getPartitaIva() + " è già utilizzata!");
         });
         clientRepo.findByPec(clientDTO.pec()).ifPresent(client -> {
-            throw new BadRequestException("L'email " + client.getPec() + " è già utilizzata!");
+            throw new BadRequestException("La PEC " + client.getPec() + " è già utilizzata!");
         });
 
         Client newClient = new Client();
