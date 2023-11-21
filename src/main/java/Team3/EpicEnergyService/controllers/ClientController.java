@@ -3,9 +3,13 @@ package Team3.EpicEnergyService.controllers;
 import Team3.EpicEnergyService.entities.Client;
 import Team3.EpicEnergyService.exceptions.BadRequestException;
 import Team3.EpicEnergyService.payloads.users.NewClientDTO;
+import Team3.EpicEnergyService.repositories.UserRepository;
 import Team3.EpicEnergyService.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
@@ -14,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/clients")
@@ -21,6 +27,8 @@ public class ClientController {
 
     @Autowired
     private ClientService clientService;
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping
     @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
@@ -78,5 +86,33 @@ public class ClientController {
                 throw new RuntimeException();
             }
         }
+    }
+
+    @GetMapping("/fatturato")
+    Page<Client> filterByFatturatoAnnuale(@RequestParam String fatturatoAnnuale, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "2") int size) {
+        List<Client> clientList = clientService.filterByFatturatoAnnuale(fatturatoAnnuale);
+        Pageable p = PageRequest.of(page, size);
+        return new PageImpl<>(clientList, p, clientList.size());
+    }
+
+    @GetMapping("/dataInserimento")
+    Page<Client> filterByDataDiInserimento(@RequestParam LocalDate dataInserimento, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "2") int size) {
+        List<Client> clientList = clientService.filterByDataDiInserimento(dataInserimento);
+        Pageable p = PageRequest.of(page, size);
+        return new PageImpl<>(clientList, p, clientList.size());
+    }
+
+    @GetMapping("/dataUltimoContatto")
+    Page<Client> filterByDataUltimoContratto(@RequestParam LocalDate dataUltimoContratto, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "2") int size) {
+        List<Client> clientList = clientService.filterByDataUltimoContratto(dataUltimoContratto);
+        Pageable p = PageRequest.of(page, size);
+        return new PageImpl<>(clientList, p, clientList.size());
+    }
+
+    @GetMapping("/nome")
+    Page<Client> filterByName(@RequestParam String nomeContatto, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "2") int size) {
+        List<Client> clientList = clientService.filterByName(nomeContatto);
+        Pageable p = PageRequest.of(page, size);
+        return new PageImpl<>(clientList, p, clientList.size());
     }
 }

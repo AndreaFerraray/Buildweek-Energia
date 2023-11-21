@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class ClientService {
@@ -99,6 +101,22 @@ public class ClientService {
         Address found = addressesRepo.findById(adressId).orElseThrow(() -> new NotFoundException(adressId));
         target.setSedeOperativa(found);
         clientRepo.save(target);
+    }
+
+    public List<Client> filterByFatturatoAnnuale(String fatturatoAnnuale) {
+        return clientRepo.filterByFatturatoAnnuale(fatturatoAnnuale);
+    }
+
+    public List<Client> filterByDataDiInserimento(LocalDate dataInserimento) {
+        return clientRepo.filterByDataDiInserimento(dataInserimento);
+    }
+
+    public List<Client> filterByDataUltimoContratto(LocalDate dataUltimoContratto) {
+        return clientRepo.filterByDataUltimoContratto(dataUltimoContratto);
+    }
+
+    public List<Client> filterByName(String nomeContatto) {
+        return clientRepo.filterByName(nomeContatto);
     }
 
 
