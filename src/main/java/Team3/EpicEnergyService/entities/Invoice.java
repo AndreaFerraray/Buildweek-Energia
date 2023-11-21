@@ -21,4 +21,7 @@ public class Invoice {
     @Enumerated(EnumType.STRING)
     private InvoiceState invoiceState;
 
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
 }

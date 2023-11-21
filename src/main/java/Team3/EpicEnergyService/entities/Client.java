@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -45,5 +46,15 @@ public class Client {
 
     private String logoAziendale;
 
+    @OneToMany(mappedBy = "client")
+    private List<Invoice> invoices;
+
+    @OneToOne
+    @JoinColumn
+    private Address sedeLegale;
+
+    @OneToOne
+    @JoinColumn
+    private Address sedeOperativa;
 
 }
