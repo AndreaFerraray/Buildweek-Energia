@@ -33,14 +33,12 @@ public class ProvincesService {
         listaProvince.forEach(elem -> {
             for (String e : elem) {
                 if (!e.contains("Sigla;Provincia;Regione")) {
-                    if (!e.contains("#RIF!")) {
-                        Province p = new Province();
-                        String[] split = e.split(";");
-                        p.setAbbreviation(split[0]);
-                        p.setProvince(split[1]);
-                        p.setRegion(split[2]);
-                        provincesRepository.save(p);
-                    }
+                    Province p = new Province();
+                    String[] split = e.split(";");
+                    p.setAbbreviation(split[0]);
+                    p.setProvince(split[1]);
+                    p.setRegion(split[2]);
+                    provincesRepository.save(p);
                 }
             }
         });
