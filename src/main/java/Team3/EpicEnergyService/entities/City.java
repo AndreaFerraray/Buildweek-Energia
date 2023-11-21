@@ -16,4 +16,7 @@ public class City {
     private int codeProv;
     private int codeCity;
     private String city;
+    @ManyToOne
+    @JoinColumn(name = "id_provinces")
+    private Province province;
 }
