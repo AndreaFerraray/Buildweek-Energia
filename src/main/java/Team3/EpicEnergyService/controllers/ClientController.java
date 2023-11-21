@@ -24,8 +24,8 @@ public class ClientController {
 
     @GetMapping
     @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
-    Page<Client> getAllClients(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "2") int size) {
-        return clientService.getAllClients(page, size);
+    Page<Client> getAllClients(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "2") int size, @RequestParam(defaultValue = "asc") String direction, @RequestParam(defaultValue = "id") String sort) {
+        return clientService.getAllClients(page, size, direction, sort);
     }
 
     @GetMapping("/{id}")
@@ -52,17 +52,17 @@ public class ClientController {
     @PatchMapping("/update/sedeLegale/clientId={clientId}&adressId={adressId}")
     @PreAuthorize("hasAuthority('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
-    public void setSedeLegale( @PathVariable long clientId, @PathVariable long adressId) throws IOException {
+    public void setSedeLegale(@PathVariable long clientId, @PathVariable long adressId) throws IOException {
 
-        clientService.assignSedeLegaleToClient(clientId,adressId);
+        clientService.assignSedeLegaleToClient(clientId, adressId);
     }
 
     @PatchMapping("/update/sedeOperativa/clientId={clientId}&adressId={adressId}")
     @PreAuthorize("hasAuthority('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
-    public void setSedeOperativa( @PathVariable long clientId, @PathVariable long adressId) throws IOException {
+    public void setSedeOperativa(@PathVariable long clientId, @PathVariable long adressId) throws IOException {
 
-        clientService.assignSedeOperativaToClient(clientId,adressId);
+        clientService.assignSedeOperativaToClient(clientId, adressId);
     }
 
     @PostMapping("/register")

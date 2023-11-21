@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,8 +35,8 @@ public class ClientService {
         return clientRepo.findById(id).orElseThrow(() -> new NotFoundException(id));
     }
 
-    public Page<Client> getAllClients(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
+    public Page<Client> getAllClients(int page, int size, String direction, String sort) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.fromString(direction), sort));
         return clientRepo.findAll(pageable);
     }
 
@@ -86,20 +87,19 @@ public class ClientService {
         return clientRepo.save(foundClient);
     }
 
-    public void assignSedeLegaleToClient(long clientId, long adressId) throws NotFoundException{
-        Client target = clientRepo.findById(clientId).orElseThrow( ()  -> new NotFoundException(clientId));
-        Address found = addressesRepo.findById(adressId).orElseThrow( ()  -> new NotFoundException(adressId));
+    public void assignSedeLegaleToClient(long clientId, long adressId) throws NotFoundException {
+        Client target = clientRepo.findById(clientId).orElseThrow(() -> new NotFoundException(clientId));
+        Address found = addressesRepo.findById(adressId).orElseThrow(() -> new NotFoundException(adressId));
         target.setSedeLegale(found);
-        clientRepo.save(target);
-        }
-
-    public void assignSedeOperativaToClient(long clientId, long adressId) throws NotFoundException{
-        Client target = clientRepo.findById(clientId).orElseThrow( ()  -> new NotFoundException(clientId));
-        Address found = addressesRepo.findById(adressId).orElseThrow( ()  -> new NotFoundException(adressId));
-        target.setSedeOperativa(found);
         clientRepo.save(target);
     }
 
+    public void assignSedeOperativaToClient(long clientId, long adressId) throws NotFoundException {
+        Client target = clientRepo.findById(clientId).orElseThrow(() -> new NotFoundException(clientId));
+        Address found = addressesRepo.findById(adressId).orElseThrow(() -> new NotFoundException(adressId));
+        target.setSedeOperativa(found);
+        clientRepo.save(target);
+    }
 
 
 }
