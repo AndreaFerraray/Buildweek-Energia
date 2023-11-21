@@ -18,5 +18,6 @@ public class RunnerCityAndProvince implements CommandLineRunner {
     public void run(String... args) throws Exception {
         provincesService.saveProvinceFromFile();
         citiesService.saveCityFromFile();
+
     }
 }
