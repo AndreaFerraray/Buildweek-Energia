@@ -5,6 +5,7 @@ import Team3.EpicEnergyService.repositories.ProvincesRepository;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -17,6 +18,8 @@ import java.util.List;
 public class ProvincesService {
     @Autowired
     private ProvincesRepository provincesRepository;
+    @Value("${file.province}")
+    private String filePath;
 
     public List<String[]> readFile(File file) {
         try {
@@ -28,7 +31,7 @@ public class ProvincesService {
     }
 
     public void saveProvinceFromFile() {
-        File provinceFile = new File("C:\\Users\\spiri\\Desktop\\vs data\\E4_D6\\Buildweek-Energia\\file\\province-italiane.csv");
+        File provinceFile = new File(filePath);
         List<String[]> listaProvince = new ArrayList<>(this.readFile(provinceFile));
         listaProvince.forEach(elem -> {
             for (String e : elem) {

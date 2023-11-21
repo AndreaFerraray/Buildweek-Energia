@@ -1,10 +1,8 @@
 package Team3.EpicEnergyService.services;
 
 import Team3.EpicEnergyService.entities.Address;
-import Team3.EpicEnergyService.entities.Invoice;
 import Team3.EpicEnergyService.exceptions.NotFoundException;
 import Team3.EpicEnergyService.payloads.users.AddressesDTO;
-import Team3.EpicEnergyService.payloads.users.NewInvoiceDTO;
 import Team3.EpicEnergyService.repositories.AddressesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,8 +10,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
 
 @Service
 public class AddressesService {
@@ -43,12 +39,12 @@ public class AddressesService {
         return addressesRepository.findAll(pageable);
     }
 
-    public void findByIdAndDelete(long id) throws NotFoundException{
+    public void findByIdAndDelete(long id) throws NotFoundException {
         Address target = this.getById(id);
         addressesRepository.delete(target);
     }
 
-    public Address findByIdAndUpdate(long id, Address body) throws NotFoundException{
+    public Address findByIdAndUpdate(long id, Address body) throws NotFoundException {
         Address target = this.getById(id);
         target.setProvince(body.getProvince());
         target.setCity(body.getCity());

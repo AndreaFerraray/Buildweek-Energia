@@ -6,6 +6,7 @@ import Team3.EpicEnergyService.repositories.ProvincesRepository;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -24,6 +25,9 @@ public class CitiesService {
     @Autowired
     private ProvincesService provincesService;
 
+    @Value("${file.comuni}")
+    private String filePath;
+
     public List<String[]> readFile(File file) {
         try {
             CSVReader reader = new CSVReader(new FileReader(file));
@@ -34,7 +38,7 @@ public class CitiesService {
     }
 
     public void saveCityFromFile() {
-        File comuniItalianiFile = new File("C:\\Users\\spiri\\Desktop\\vs data\\E4_D6\\Buildweek-Energia\\file\\comuni-italiani.csv");
+        File comuniItalianiFile = new File(filePath);
         List<String[]> listaComuni = new ArrayList<>(this.readFile(comuniItalianiFile));
         AtomicInteger i = new AtomicInteger();
         listaComuni.forEach(elem -> {
