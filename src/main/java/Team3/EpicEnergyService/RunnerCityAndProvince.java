@@ -16,8 +16,7 @@ public class RunnerCityAndProvince implements CommandLineRunner {
     /*CAMBIARE IL PATH DEL FILE PER CARICARE SU BD*/
     @Override
     public void run(String... args) throws Exception {
-       
-        provincesService.saveProvinceFromFile();
-        citiesService.saveCityFromFile();
+        //provincesService.saveProvinceFromFile();
+        //citiesService.saveCityFromFile();
     }
 }
