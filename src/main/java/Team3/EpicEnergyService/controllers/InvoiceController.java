@@ -102,4 +102,14 @@ public class InvoiceController {
         Pageable p = PageRequest.of(page, size);
         return new PageImpl<>(invoiceList, p, invoiceList.size());
     }
+
+
+    @GetMapping("/sum")
+    Page<Invoice>filterBySum(@RequestParam double minSum,@RequestParam double maxSum,@RequestParam(defaultValue = "0")int page,@RequestParam(defaultValue = "2")int size){
+        List<Invoice> invoiceList = invoiceService.filterBySum( minSum,  maxSum);
+        Pageable p = PageRequest.of(page, size);
+        return new PageImpl<>(invoiceList, p, invoiceList.size());
+
+    }
+
 }
