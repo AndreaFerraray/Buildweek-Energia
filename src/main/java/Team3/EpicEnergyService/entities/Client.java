@@ -2,23 +2,22 @@ package Team3.EpicEnergyService.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
-import java.util.Date;
-@NoArgsConstructor
-@AllArgsConstructor
-@Setter
-@Getter
-@Builder
-@Entity
-@Table(name = "Client")
+
 public class Client {
 
 
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Setter
+    @Getter
+    @Builder
+    @Entity
+    @Table(name = "Client")
 
 
-
+    public class User {
 
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,8 +27,8 @@ public class Client {
         private Long vatNumber ;
         @Column(name = "email",nullable = false)
         private String email;
-
-
+        @Column(name = "insertion date",nullable = false)
+        private LocalDate insertionDate;
         @Column(name = "lastContractDate")
         private String lastContractDate;
         @Column(name = "annualTurnover")
@@ -51,9 +50,8 @@ public class Client {
         private String corporateLogo;
 
 
-        @Column(name = "insertion date",nullable = false)
-        @CreationTimestamp
-        private Date insertionDate;
+
+
 
 
 
@@ -61,4 +59,4 @@ public class Client {
         private BusinessName businessName;
 
     }
-
+}
