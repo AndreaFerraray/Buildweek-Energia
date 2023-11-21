@@ -49,6 +49,22 @@ public class ClientController {
         return clientService.uploadLogo(body, id);
     }
 
+    @PatchMapping("/update/sedeLegale/clientId={clientId}&adressId={adressId}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void setSedeLegale( @PathVariable long clientId, @PathVariable long adressId) throws IOException {
+
+        clientService.assignSedeLegaleToClient(clientId,adressId);
+    }
+
+    @PatchMapping("/update/sedeOperativa/clientId={clientId}&adressId={adressId}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void setSedeOperativa( @PathVariable long clientId, @PathVariable long adressId) throws IOException {
+
+        clientService.assignSedeOperativaToClient(clientId,adressId);
+    }
+
     @PostMapping("/register")
     @PreAuthorize("hasAuthority('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)

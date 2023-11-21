@@ -28,7 +28,7 @@ public class CitiesService {
     }
 
     public void saveCityFromFile() {
-        File comuniItalianiFile = new File("/Users/Simo/Documents/Epicode/BackEnd/Buildweek-Energia/file/comuni-italiani.csv");
+        File comuniItalianiFile = new File("C:\\Users\\spiri\\Desktop\\vs data\\E4_D6\\Buildweek-Energia\\file\\comuni-italiani.csv");
         //File provinceFile = new File("/Users/Simo/Documents/Epicode/BackEnd/Buildweek-Energia/file/province-italiane.csv");
         List<String[]> listaComuni = new ArrayList<>(this.readFile(comuniItalianiFile));
         //List<String[]> listaProvince = new ArrayList<>(this.readFile(provinceFile));
