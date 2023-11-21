@@ -1,62 +1,49 @@
 package Team3.EpicEnergyService.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
+@Entity
+@NoArgsConstructor
+@Getter
+@Setter
+@Table(name = "clients")
 public class Client {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @Enumerated(EnumType.STRING)
+    private ClientType ragioneSociale;
+
+    private String partitaIva;
+
+    private String email;
+
+    private LocalDate dataInserimento;
+
+    private LocalDate dataUltimoContratto;
+
+    private long fatturatoAnnuale;
+
+    private String pec;
+
+    private long telefono;
+
+    private String emailContatto;
+
+    private String nomeContatto;
+
+    private String cognomeContatto;
+
+    private long telefonoContatto;
 
 
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Setter
-    @Getter
-    @Builder
-    @Entity
-    @Table(name = "Client")
+    private String logoAziendale;
 
 
-    public class User {
-
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        private Long id;
-
-        @Column(name = "VAT NUMBER",nullable = false)
-        private Long vatNumber ;
-        @Column(name = "email",nullable = false)
-        private String email;
-        @Column(name = "insertion date",nullable = false)
-        private LocalDate insertionDate;
-        @Column(name = "lastContractDate")
-        private String lastContractDate;
-        @Column(name = "annualTurnover")
-        private Double annualTurnover;
-        @Column(name="PEC")
-        private String PEC;
-
-        @Column(name = "companyTelephone")
-        private String companyTelephone;
-        @Column(name = "emailReferent")
-        private String emailReferent;
-        @Column(name = "nameReferent")
-        private String nameReferent;
-        @Column(name="cognomeReferent")
-        private String cognomeReferent;
-        @Column(name = "numberReferent")
-        private String numberReferent;
-        @Column(name="corporateLogo")
-        private String corporateLogo;
-
-
-
-
-
-
-
-        @Enumerated(EnumType.STRING)
-        private BusinessName businessName;
-
-    }
 }
