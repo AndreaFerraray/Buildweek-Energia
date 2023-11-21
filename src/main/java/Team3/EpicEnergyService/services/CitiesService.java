@@ -2,6 +2,7 @@ package Team3.EpicEnergyService.services;
 
 import Team3.EpicEnergyService.entities.City;
 import Team3.EpicEnergyService.repositories.CitiesRepository;
+import Team3.EpicEnergyService.repositories.ProvincesRepository;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +13,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class CitiesService {
     @Autowired
     private CitiesRepository citiesRepository;
+    @Autowired
+    private ProvincesRepository provincesRepository;
+    @Autowired
+    private ProvincesService provincesService;
 
     public List<String[]> readFile(File file) {
         try {
@@ -29,15 +35,28 @@ public class CitiesService {
 
     public void saveCityFromFile() {
         File comuniItalianiFile = new File("C:\\Users\\spiri\\Desktop\\vs data\\E4_D6\\Buildweek-Energia\\file\\comuni-italiani.csv");
-        //File provinceFile = new File("/Users/Simo/Documents/Epicode/BackEnd/Buildweek-Energia/file/province-italiane.csv");
         List<String[]> listaComuni = new ArrayList<>(this.readFile(comuniItalianiFile));
-        //List<String[]> listaProvince = new ArrayList<>(this.readFile(provinceFile));
+        AtomicInteger i = new AtomicInteger();
         listaComuni.forEach(elem -> {
             for (String e : elem) {
                 if (!e.contains("Codice Provincia (Storico)(1);Progressivo del Comune (2);Denominazione in italiano")) {
-                    if (!e.contains("#RIF!")) {
+                    if (e.contains("#RIF!")) {
+                        i.getAndIncrement();
                         City c = new City();
                         String[] split = e.split(";");
+                        if (provincesRepository.findByProvince(split[3]) != null) {
+                            c.setProvince(provincesRepository.findByProvince(split[3]));
+                        }
+                        c.setCity(split[2]);
+                        c.setCodeCity(Integer.parseInt("00" + i));
+                        c.setCodeProv(Integer.parseInt(split[0]));
+                        citiesRepository.save(c);
+                    } else {
+                        City c = new City();
+                        String[] split = e.split(";");
+                        if (provincesRepository.findByProvince(split[3]) != null) {
+                            c.setProvince(provincesRepository.findByProvince(split[3]));
+                        }
                         c.setCity(split[2]);
                         c.setCodeCity(Integer.parseInt(split[1]));
                         c.setCodeProv(Integer.parseInt(split[0]));

@@ -3,11 +3,15 @@ package Team3.EpicEnergyService.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+
+import java.util.List;
 
 @Entity
 @Table(name = "provinces")
 @Getter
 @Setter
+@ToString
 public class Province {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,4 +20,7 @@ public class Province {
     private String abbreviation;
     private String province;
     private String region;
+    @OneToMany(mappedBy = "province")
+    @ToString.Exclude
+    private List<City> cities;
 }
