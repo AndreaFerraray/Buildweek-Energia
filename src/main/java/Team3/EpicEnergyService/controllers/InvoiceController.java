@@ -22,7 +22,7 @@ public class InvoiceController {
 
     @GetMapping("")
     @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
-    public Page<Invoice> getDevices(@RequestParam(defaultValue = "0") int page,
+    public Page<Invoice> getInvoices(@RequestParam(defaultValue = "0") int page,
                                     @RequestParam(defaultValue = "10") int size,
                                     @RequestParam(defaultValue = "id") String orderBy) {
         return invoiceService.getInvoices(page, size, orderBy);
@@ -31,7 +31,7 @@ public class InvoiceController {
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     @PreAuthorize("hasAuthority('ADMIN')")
-    public Invoice saveDevice(@RequestBody @Validated NewInvoiceDTO body, BindingResult validation) {
+    public Invoice saveInvoice(@RequestBody @Validated NewInvoiceDTO body, BindingResult validation) {
         if (validation.hasErrors()) {
             throw new BadRequestException(validation.getAllErrors());
         } else {

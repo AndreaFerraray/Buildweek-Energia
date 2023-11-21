@@ -1,9 +1,11 @@
 package Team3.EpicEnergyService.services;
 
+import Team3.EpicEnergyService.entities.Address;
 import Team3.EpicEnergyService.entities.Client;
 import Team3.EpicEnergyService.exceptions.BadRequestException;
 import Team3.EpicEnergyService.exceptions.NotFoundException;
 import Team3.EpicEnergyService.payloads.users.NewClientDTO;
+import Team3.EpicEnergyService.repositories.AddressesRepository;
 import Team3.EpicEnergyService.repositories.ClientRepository;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
@@ -21,6 +23,9 @@ import java.io.IOException;
 public class ClientService {
     @Autowired
     private ClientRepository clientRepo;
+
+    @Autowired
+    private AddressesRepository addressesRepo;
 
     @Autowired
     private Cloudinary cloudinary;
@@ -80,6 +85,21 @@ public class ClientService {
         foundClient.setLogoAziendale(cloudinaryURL);
         return clientRepo.save(foundClient);
     }
+
+    public void assignSedeLegaleToClient(long clientId, long adressId) throws NotFoundException{
+        Client target = clientRepo.findById(clientId).orElseThrow( ()  -> new NotFoundException(clientId));
+        Address found = addressesRepo.findById(adressId).orElseThrow( ()  -> new NotFoundException(adressId));
+        target.setSedeLegale(found);
+        clientRepo.save(target);
+        }
+
+    public void assignSedeOperativaToClient(long clientId, long adressId) throws NotFoundException{
+        Client target = clientRepo.findById(clientId).orElseThrow( ()  -> new NotFoundException(clientId));
+        Address found = addressesRepo.findById(adressId).orElseThrow( ()  -> new NotFoundException(adressId));
+        target.setSedeOperativa(found);
+        clientRepo.save(target);
+    }
+
 
 
 }
