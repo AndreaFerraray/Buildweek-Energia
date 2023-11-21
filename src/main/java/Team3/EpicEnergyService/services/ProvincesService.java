@@ -6,6 +6,10 @@ import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -45,5 +49,10 @@ public class ProvincesService {
                 }
             }
         });
+    }
+
+    public Page<Province> getAllProvince(int page, int size, String sort) {
+        Pageable p = PageRequest.of(page, size, Sort.by(sort));
+        return provincesRepository.findAll(p);
     }
 }

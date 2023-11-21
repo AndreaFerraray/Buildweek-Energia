@@ -70,4 +70,8 @@ public class CitiesService {
             }
         });
     }
+
+    public List<City> getByAbbreviation(String abbreviation) {
+        return citiesRepository.findByAbbreviation(abbreviation);
+    }
 }
