@@ -81,4 +81,8 @@ public class InvoiceService {
     public List<Invoice> filterByYear(LocalDate date) {
         return invoiceRepository.filterByYear(date);
     }
+
+    public List<Invoice> filterBySum(double minSum, double maxSum) {
+        return  invoiceRepository.filterBySum( minSum,  maxSum);
+    }
 }

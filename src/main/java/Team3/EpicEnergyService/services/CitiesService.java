@@ -38,6 +38,7 @@ public class CitiesService {
     }
 
     public void saveCityFromFile() {
+
         File comuniItalianiFile = new File(filePath);
         List<String[]> listaComuni = new ArrayList<>(this.readFile(comuniItalianiFile));
         AtomicInteger i = new AtomicInteger();
@@ -111,7 +112,6 @@ public class CitiesService {
                                     break;
                                 }
                             }
-                            System.err.println(split[3]);
                         }
                         c.setCity(split[2]);
                         c.setCodeCity(Integer.parseInt(split[1]));
