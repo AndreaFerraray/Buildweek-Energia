@@ -9,6 +9,7 @@ import Team3.EpicEnergyService.repositories.UserRepository;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -28,6 +29,12 @@ public class UserService {
 
     @Autowired
     private Cloudinary cloudinary;
+
+    @Autowired
+    private EmailService emailService;
+
+    @Value("${spring.mail.receiver}")
+    private String email;
 
 
     public User findUserById(long id) throws NotFoundException {
@@ -54,6 +61,7 @@ public class UserService {
         newUser.setLastName(userDTO.lastName());
         newUser.setEmail(userDTO.email());
         newUser.setPassword(bcrypt.encode(userDTO.password()));
+        emailService.sendEmail(email,"account creato correttamente","benvenuto "+newUser.getUsername()+" il tuo account e' stato creato con successo");
         return userRepo.save(newUser);
     }
 
