@@ -57,6 +57,8 @@ public class CitiesService {
                         String[] split = e.split(";");
                         if (provincesRepository.findByProvince(split[3]) != null) {
                             c.setProvince(provincesRepository.findByProvince(split[3]));
+                        } else {
+                            System.err.println(split[3]);
                         }
                         c.setCity(split[2]);
                         c.setCodeCity(Integer.parseInt(split[1]));
