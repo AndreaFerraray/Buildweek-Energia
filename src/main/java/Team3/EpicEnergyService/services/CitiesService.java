@@ -72,7 +72,7 @@ public class CitiesService {
                                     break;
                                 }
                                 case ("Valle d'Aosta/Vallée d'Aoste"): {
-                                    c.setProvince(provincesRepository.findByProvince("Valle d'Aosta"));
+                                    c.setProvince(provincesRepository.findByProvince("Aosta"));
                                     break;
                                 }
                                 case ("Monza e della Brianza"): {

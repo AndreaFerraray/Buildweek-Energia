@@ -1,0 +1,16 @@
+body {
+  background: rgb(33, 28, 30);
+  background: radial-gradient(circle, rgba(33, 28, 30, 1) 0%, rgba(10, 31, 56, 1) 100%);
+  color: white;
+}
+.registerButton {
+  background-color: rgb(10, 31, 56);
+}
+.registerButton:hover {
+  background-color: rgb(10, 31, 56);
+  scale: 1.005;
+}
+.bg_mui {
+  background: rgb(33, 28, 30);
+  background: radial-gradient(circle, rgba(33, 28, 30, 1) 0%, rgba(10, 31, 56, 1) 100%);
+}
