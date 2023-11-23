@@ -54,6 +54,7 @@ public class UserService {
         newUser.setLastName(userDTO.lastName());
         newUser.setEmail(userDTO.email());
         newUser.setPassword(bcrypt.encode(userDTO.password()));
+        newUser.setAvatar("https://ui-avatars.com/api/?name=" + userDTO.firstName() + "+" + userDTO.lastName());
         return userRepo.save(newUser);
     }
 
