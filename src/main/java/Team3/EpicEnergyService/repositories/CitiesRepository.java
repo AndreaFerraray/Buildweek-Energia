@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface CitiesRepository extends JpaRepository<City, Long> {
-    @Query("SELECT c FROM City c JOIN c.province p WHERE p.abbreviation=:abbreviation ")
+    @Query("SELECT c FROM City c FULL JOIN c.province p WHERE LOWER(p.abbreviation)=LOWER(:abbreviation)")
     List<City> findByAbbreviation(String abbreviation);
 }

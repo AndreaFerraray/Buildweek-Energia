@@ -60,6 +60,58 @@ public class CitiesService {
                         String[] split = e.split(";");
                         if (provincesRepository.findByProvince(split[3]) != null) {
                             c.setProvince(provincesRepository.findByProvince(split[3]));
+                        } else {
+                            switch (split[3]) {
+                                case ("Forlì-Cesena"): {
+                                    c.setProvince(provincesRepository.findByProvince("Forli-Cesena"));
+                                    break;
+                                }
+                                case ("Verbano-Cusio-Ossola"): {
+                                    c.setProvince(provincesRepository.findByProvince("Verbania"));
+                                    break;
+                                }
+                                case ("Valle d'Aosta/Vallée d'Aoste"): {
+                                    c.setProvince(provincesRepository.findByProvince("Valle d'Aosta"));
+                                    break;
+                                }
+                                case ("Monza e della Brianza"): {
+                                    c.setProvince(provincesRepository.findByProvince("Monza-Brianza"));
+                                    break;
+                                }
+                                case ("Bolzano/Bozen"): {
+                                    c.setProvince(provincesRepository.findByProvince("Bolzano"));
+                                    break;
+                                }
+                                case ("La Spezia"): {
+                                    c.setProvince(provincesRepository.findByProvince("La-Spezia"));
+                                    break;
+                                }
+                                case ("Reggio nell'Emilia"): {
+                                    c.setProvince(provincesRepository.findByProvince("Reggio-Emilia"));
+                                    break;
+                                }
+                                case ("Pesaro e Urbino"): {
+                                    c.setProvince(provincesRepository.findByProvince("Pesaro-Urbino"));
+                                    break;
+                                }
+                                case ("Ascoli Piceno"): {
+                                    c.setProvince(provincesRepository.findByProvince("Ascoli-Piceno"));
+                                    break;
+                                }
+                                case ("Reggio Calabria"): {
+                                    c.setProvince(provincesRepository.findByProvince("Reggio-Calabria"));
+                                    break;
+                                }
+                                case ("Sud Sardegna"): {
+                                    c.setProvince(provincesRepository.findByProvince("Sassari"));
+                                    break;
+                                }
+                                case ("Vibo Valentia"): {
+                                    c.setProvince(provincesRepository.findByProvince("Vibo-Valentia"));
+                                    break;
+                                }
+                            }
+                            System.err.println(split[3]);
                         }
                         c.setCity(split[2]);
                         c.setCodeCity(Integer.parseInt(split[1]));

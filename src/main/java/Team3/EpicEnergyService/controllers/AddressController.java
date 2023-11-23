@@ -28,19 +28,25 @@ public class AddressController {
     @Autowired
     private CitiesService citiesService;
 
-    //CONTROLLE PER TUTTE LE PROVINCE
-    @GetMapping("")
+    //CONTROLLER PER TUTTE LE PROVINCE
+    //QUANDO SI CLICCA SUL MENU DELLE PROVINCE LATO FE PARTE LA RICHIESTA TIPO GET E RITORNA UNA PAGE
+    //DI TUTTE LE PROVINCE
+    @GetMapping("/prov")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
     public Page<Province> getAllProvince(@RequestParam(defaultValue = "0") int page,
                                          @RequestParam(defaultValue = "10") int size,
                                          @RequestParam(defaultValue = "id") String sort) {
         return provincesService.getAllProvince(page, size, sort);
     }
 
-    @GetMapping("/altro")
-    public Page<City> getLoansByUserId(@PathVariable String abb,
-                                       @RequestParam(defaultValue = "0") int page,
-                                       @RequestParam(defaultValue = "10") int size,
-                                       @RequestParam(defaultValue = "id") String sort) {
+    //QUESTO INVECE PASSA LA PROVINCI SELEZIONATA DALL'UTENTE NEL URL E RITORNA TUTTI I COMUNI DI QUELLA PROVINCIA.
+    @GetMapping("/comuni/{abb}")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+    public Page<City> GetComuniByAbbr(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sort,
+            @PathVariable String abb) {
         List<City> cityPerProvince = citiesService.getByAbbreviation(abb);
         Pageable p = PageRequest.of(page, size, Sort.by(sort));
         return new PageImpl<>(cityPerProvince, p, cityPerProvince.size());

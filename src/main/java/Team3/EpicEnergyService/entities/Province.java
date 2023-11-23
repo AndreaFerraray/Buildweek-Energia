@@ -1,5 +1,6 @@
 package Team3.EpicEnergyService.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,5 +23,6 @@ public class Province {
     private String region;
     @OneToMany(mappedBy = "province")
     @ToString.Exclude
+    @JsonIgnore
     private List<City> cities;
 }
