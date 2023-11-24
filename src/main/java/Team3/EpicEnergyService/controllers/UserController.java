@@ -21,7 +21,7 @@ public class UserController {
     public UserService userService;
 
 
-    @PatchMapping("/{id}")
+    @PatchMapping("/updateRole/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public User findByIdAndUpdateRole(@PathVariable long id) {
         return userService.findByIdAndUpdateRole(id);
