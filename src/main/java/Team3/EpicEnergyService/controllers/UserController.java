@@ -22,7 +22,7 @@ public class UserController {
 
 
     @PatchMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public User findByIdAndUpdateRole(@PathVariable long id) {
         return userService.findByIdAndUpdateRole(id);
     }
