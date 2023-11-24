@@ -20,11 +20,11 @@ public interface InvoiceRepository extends JpaRepository<Invoice, Integer> {
     @Query("SELECT i FROM Invoice i WHERE i.date = :date")
     List<Invoice> filterByDate(LocalDate date);
 
-    @Query("SELECT i FROM Invoice i WHERE EXTRACT(YEAR FROM i.date) = :date")
-    List<Invoice> filterByYear(LocalDate date);
+    @Query("SELECT i FROM Invoice i WHERE EXTRACT(YEAR FROM i.date) = :year")
+    List<Invoice> filterByYear(int year);
 
     @Query("SELECT i FROM Invoice i WHERE i.sum >= :minSum AND i.sum <= :maxSum")
-    List<Invoice>filterBySum(@Param("minSum") double minSum,@Param("maxSum") double maxSum);
+    List<Invoice> filterBySum(@Param("minSum") double minSum, @Param("maxSum") double maxSum);
 
 
 }

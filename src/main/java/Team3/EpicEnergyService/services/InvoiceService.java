@@ -78,11 +78,11 @@ public class InvoiceService {
         return invoiceRepository.filterByDate(date);
     }
 
-    public List<Invoice> filterByYear(LocalDate date) {
-        return invoiceRepository.filterByYear(date);
+    public List<Invoice> filterByYear(int year) {
+        return invoiceRepository.filterByYear(year);
     }
 
     public List<Invoice> filterBySum(double minSum, double maxSum) {
-        return  invoiceRepository.filterBySum( minSum,  maxSum);
+        return invoiceRepository.filterBySum(minSum, maxSum);
     }
 }
