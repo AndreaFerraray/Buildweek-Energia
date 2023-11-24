@@ -22,6 +22,7 @@ public class UserController {
 
 
     @PatchMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
     public User findByIdAndUpdateRole(@PathVariable long id) {
         return userService.findByIdAndUpdateRole(id);
     }
@@ -56,12 +57,12 @@ public class UserController {
         userService.findUserByIdAndDelete(loggedUser.getUserId());
     }
 
-    @PatchMapping("/upload/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public User uploadAvatar(@RequestParam("avatar") MultipartFile body, @PathVariable long id) throws IOException {
+    @PatchMapping("/upload")
+    @PreAuthorize("hasAnyAuthority('ADMIN','USER')")
+    public User uploadAvatar(@RequestParam("avatar") MultipartFile body, @AuthenticationPrincipal User loggedUser) throws IOException {
         System.out.println(body.getSize());
         System.out.println(body.getContentType());
-        return userService.uploadPicture(body, id);
+        return userService.uploadPicture(body, loggedUser.getUserId());
     }
 
 

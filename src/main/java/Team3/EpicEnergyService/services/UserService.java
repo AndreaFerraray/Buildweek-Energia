@@ -15,7 +15,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -84,7 +83,7 @@ public class UserService {
         return userRepo.save(foundUser);
     }
 
-    public User uploadPicture(MultipartFile file, @PathVariable long id) throws IOException {
+    public User uploadPicture(MultipartFile file, long id) throws IOException {
         User foundUser = this.findUserById(id);
         String cloudinaryURL = (String) cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
         foundUser.setAvatar(cloudinaryURL);
